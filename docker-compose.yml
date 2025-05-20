@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./e-invoice-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./e-invoice-frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    command: npm run dev
+    restart: unless-stopped
+  backend:
+    build:
+      context: ./e-invoice-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./e-invoice-backend:/app
+    ports:
+      - "5001:3000"
+    command: npm run start:dev
+    restart: unless-stopped

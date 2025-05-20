@@ -1,0 +1,39 @@
+# Node.js - Umum untuk Nuxt dan Nest
+node_modules/
+dist/
+build/
+.npm/
+
+# VS Code config
+.vscode/
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Env files (jangan commit rahsia!)
+.env
+.env.*
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker related
+**/Dockerfile
+docker-compose.override.yml
+
+# Lock files (optional kalau team pakai npm dan yarn berbeza)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Nuxt specific
+.nuxt/
+.output/
+*.local
+
+# NestJS specific
+coverage/
