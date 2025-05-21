@@ -22,13 +22,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Docker related
-**/Dockerfile
 docker-compose.override.yml
-
-# Lock files (optional kalau team pakai npm dan yarn berbeza)
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
 
 # Nuxt specific
 .nuxt/
