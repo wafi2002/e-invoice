@@ -22,3 +22,9 @@ logs
 .env
 .env.*
 !.env.example
+
+#Docker-related
+e-invoice-backend/Dockerfile
+e-invoice-frontend/Dockerfile
+docker-compose.yml
+docker-compose*.yml
