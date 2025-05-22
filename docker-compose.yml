@@ -19,6 +19,6 @@ services:
       - ./e-invoice-backend:/app
       - /app/node_modules
     ports:
-      - "5001:5001"
+      - "5000:5000"
     command: npm run start:dev
     restart: unless-stopped

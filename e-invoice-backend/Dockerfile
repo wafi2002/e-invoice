@@ -10,8 +10,8 @@ COPY . .
 # 4. Install dependencies
 RUN npm install
 
-# 5. Open port 5001
-EXPOSE 5001
+# 5. Open port 5000
+EXPOSE 5000
 
 # 6. Start the application
 CMD ["npm", "run", "start:dev"]
