@@ -10,13 +10,18 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "@nuxt/eslint": "^1.4.1",
     "@nuxt/icon": "^1.13.0",
-    "@nuxt/ui": "^3.1.2",
+    "@nuxt/ui": "https://pkg.pr.new/@nuxt/ui@4c96909",
     "eslint": "^9.27.0",
     "nuxt": "^3.17.3",
     "typescript": "^5.8.3",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "vite-plugin-vuetify": "^2.1.1",
+    "vuetify": "^3.8.6"
   }
 }
