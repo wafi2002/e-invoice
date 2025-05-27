@@ -15,6 +15,7 @@
     "@nuxt/icon": "^1.13.0",
     "@nuxt/ui": "https://pkg.pr.new/@nuxt/ui@4c96909",
     "eslint": "^9.27.0",
+    "node-fetch": "^3.3.2",
     "nuxt": "^3.17.3",
     "typescript": "^5.8.3",
     "vue": "^3.5.14",
