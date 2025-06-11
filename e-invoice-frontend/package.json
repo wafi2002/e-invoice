@@ -14,6 +14,7 @@
     "@nuxt/eslint": "^1.4.1",
     "@nuxt/icon": "^1.13.0",
     "@nuxt/ui": "https://pkg.pr.new/@nuxt/ui@4c96909",
+    "chart.js": "^4.4.9",
     "eslint": "^9.27.0",
     "nuxt": "^3.17.3",
     "typescript": "^5.8.3",
