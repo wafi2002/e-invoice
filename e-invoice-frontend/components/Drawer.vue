@@ -1,235 +1,182 @@
 <template>
     <aside :class="[
         'min-h-screen transition-all duration-300 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 shadow-sm flex flex-col',
-        open ? 'w-64' : 'w-0'
+        open ? 'w-70' : 'w-0'
     ]">
         <!-- Header Drawer -->
-        <div class="flex items-center h-16 px-4 border-b border-gray-200 dark:border-gray-700 shrink-0 shadow">
-            <span class="text-lg font-semibold text-gray-800 dark:text-white">MyApp</span>
+        <div class="flex items-center h-16 px-4 border-b border-gray-200 dark:border-gray-700 shadow">
+            <span class="text-lg font-semibold text-gray-800 dark:text-white">E-Invoice</span>
         </div>
 
         <!-- Navigation content -->
-        <nav class="flex-1 overflow-y-auto px-4 mt-4" :class="open ? 'px-4' : 'px-0'">
-            <UNavigationMenu orientation="vertical" :items="itemsWithPadding"
-                class="data-[orientation=vertical]:w-48" />
+        <nav class="flex-1 overflow-y-auto mt-4" :class="open ? 'px-4' : 'px-0'">
+            <UNavigationMenu orientation="vertical" :items="items" class="data-[orientation=vertical]:w-60" />
         </nav>
     </aside>
 </template>
 
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
-import { computed } from 'vue'
+
+const rawMenu = [
+    {
+        label: 'Integration',
+        icon: 'i-lucide-plug',
+        children: [
+            ['Manual Integration', 'i-lucide-settings', 'Fully styled and customizable components for Nuxt.'],
+            ['Manual Oracle Fetch', 'i-lucide-database', 'Learn how to install and configure Nuxt UI in your application.'],
+            ['Import JSON and XML', 'i-lucide-code', 'You have nothing to do, @nuxt/icon will handle it automatically.'],
+            ['Import CSV (Sales)', 'i-lucide-file-spreadsheet', 'Choose a primary and a neutral color from your Tailwind CSS theme.'],
+            ['Purchase Invoice', 'i-lucide-receipt', 'Customize components using `class` or `ui` props.'],
+            ['Integration Log', 'i-lucide-clipboard-list', 'Customize components using `class` or `ui` props.']
+        ]
+    },
+    {
+        label: 'Dashboards',
+        icon: 'i-lucide-layout-dashboard',
+        children: [
+            ['Group Of Companies', 'i-lucide-building-2', 'Define shortcuts for your application.', '/composables/define-shortcuts'],
+            ['Company', 'i-lucide-building', 'Display a modal/slideover within your application.', '/composables/use-overlay'],
+            ['Status', 'i-lucide-activity', 'Display a toast within your application.', '/composables/use-toast']
+        ]
+    },
+    {
+        label: 'Company',
+        icon: 'i-lucide-building',
+        to: '/components',
+        active: true,
+        defaultOpen: true,
+        children: [
+            ['Company Setup', 'i-lucide-settings', 'Use NuxtLink with superpowers.', '/components/link'],
+            ['New Item Category', 'i-lucide-tags', 'Display a modal within your application.', '/components/modal'],
+            ['Payment History', 'i-lucide-credit-card', 'Display a list of links.', '/components/navigation-menu']
+        ]
+    },
+    {
+        label: 'E-Invoice',
+        icon: 'i-lucide-file-digit',
+        to: '/components',
+        class: 'pb-3 px-4 py-2',
+        active: true,
+        defaultOpen: true,
+        children: [
+            ['Sales','i-lucide-shopping-cart'],
+            ['Consolidated','i-lucide-layers'],
+            ['Self-Billed','i-lucide-user-check'],
+            ['Debit Note','i-lucide-arrow-up-right'],
+            ['Credit Note','i-lucide-arrow-down-left'],
+            ['Cancellation','i-lucide-x-octagon'],
+            ['Refund','i-lucide-rotate-ccw'],
+        ]
+    },
+    {
+        label: 'Customer',
+        icon: 'i-lucide-user',
+        to: '/components',
+        class: 'pb-3 px-4 py-2',
+        active: true,
+        defaultOpen: true,
+        children:[]
+    },
+    {
+        label: 'Vendor',
+        icon: 'i-lucide-handshake',
+        to: '/components',
+        class: 'pb-3 px-4 py-2',
+        active: true,
+        defaultOpen: true,
+        children:[]
+    },
+    {
+        label: 'Branch',
+        icon: 'i-lucide-network',
+        to: '/components',
+        class: 'pb-3 px-4 py-2',
+        active: true,
+        defaultOpen: true,
+        children:[]
+    },
+    {
+        label: 'Reports',
+        icon: 'i-lucide-bar-chart-3',
+        to: '/components',
+        class: 'pb-3 px-4 py-2',
+        active: true,
+        defaultOpen: true,
+        children: [
+            ['API Log','i-lucide-terminal'],
+            ['Branches','i-lucide-building-2'],
+        ]
+    },
+    {
+        label: 'Admin',
+        icon: 'i-lucide-shield-check',
+        to: '/components',
+        class: 'pb-3 px-4 py-2',
+        active: true,
+        defaultOpen: true,
+        children: [
+            ['FMH Data Mapping','i-lucide-map'],
+            ['Seito Data Mapping', 'i-lucide-map'],
+            ['User Setup', 'i-lucide-user-plus'],
+            ['User Log', 'i-lucide-list'],
+            ['System Log', 'i-lucide-server'],
+            ['Classification Code','i-lucide-tags'],
+            ['Country Code','i-lucide-globe'],
+            ['Currency Code','i-lucide-dollar-sign'],
+            ['Invoice Type Code', 'i-lucide-receipt'],
+            ['MSIC Code','i-lucide-barcode'],
+            ['Payment Mode Code', 'i-lucide-credit-card'],
+            ['State Code', 'i-lucide-map-pin'],
+            ['Tax Type Code', 'i-lucide-percent'],
+            ['Unit Of Measurement', 'i-lucide-ruler']
+        ]
+    },
+    {
+        label: 'Documentation',
+        icon: 'i-lucide-file-text',
+        to: '/components',
+        class: 'pb-3 px-4 py-2',
+        active: true,
+        defaultOpen: true,
+        children: [
+            ['System Flow','i-lucide-git-branch'],
+            ['Faq','i-lucide-help-circle'],
+            ['LHDN Guides', 'i-lucide-book-open-check'],
+            ['API Updates', 'i-lucide-code'],
+            ['Classification Code', 'i-lucide-tags'],
+            ['Country Code', 'i-lucide-globe'],
+            ['Currency Code', 'i-lucide-dollar-sign'],
+            ['Invoice Type Code', 'i-lucide-receipt'],
+            ['MSIC Code', 'i-lucide-barcode'],
+            ['Payment Mode Code', 'i-lucide-credit-card'],
+            ['State Code', 'i-lucide-map-pin'],
+        ]
+    }
+
+]
+
+const defaultChildClass = 'px-4 py-2'
+const defaultParentClass = 'pb-3 px-4 py-2'
+
 
 const items = ref<NavigationMenuItem[][]>([
-    [
-        {
-            label: 'Guide',
-            icon: 'i-lucide-book-open',
-            ui: {
-                childItem: 'pb-3',   // padding bawah pada anak item
-                link: 'px-4 py-2'   // padding kiri-kanan 4, atas-bawah 2 pada link
-            },
-            children: [
-                {
-                    label: 'Introduction',
-                    description: 'Fully styled and customizable components for Nuxt.',
-                    icon: 'i-lucide-house',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Installation',
-                    description: 'Learn how to install and configure Nuxt UI in your application.',
-                    icon: 'i-lucide-cloud-download',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Icons',
-                    icon: 'i-lucide-smile',
-                    description: 'You have nothing to do, @nuxt/icon will handle it automatically.',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Colors',
-                    icon: 'i-lucide-swatch-book',
-                    description: 'Choose a primary and a neutral color from your Tailwind CSS theme.',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Theme',
-                    icon: 'i-lucide-cog',
-                    description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                }
-            ]
-        },
-        {
-            label: 'Composables',
-            icon: 'i-lucide-database',
-            ui: {
-                childItem: 'pb-3',   // padding bawah pada anak item
-                link: 'px-4 py-2'   // padding kiri-kanan 4, atas-bawah 2 pada link
-            },
-            children: [
-                {
-                    label: 'defineShortcuts',
-                    icon: 'i-lucide-file-text',
-                    description: 'Define shortcuts for your application.',
-                    to: '/composables/define-shortcuts',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'useOverlay',
-                    icon: 'i-lucide-file-text',
-                    description: 'Display a modal/slideover within your application.',
-                    to: '/composables/use-overlay',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'useToast',
-                    icon: 'i-lucide-file-text',
-                    description: 'Display a toast within your application.',
-                    to: '/composables/use-toast',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                }
-            ]
-        },
-        {
-            label: 'Components',
-            icon: 'i-lucide-box',
-            to: '/components',
-            active: true,
-            defaultOpen: true,
-            ui: {
-                childItem: 'pb-3',   // padding bawah pada anak item
-                link: 'px-4 py-2'   // padding kiri-kanan 4, atas-bawah 2 pada link
-            },
-            children: [
-                {
-                    label: 'Link',
-                    icon: 'i-lucide-file-text',
-                    description: 'Use NuxtLink with superpowers.',
-                    to: '/components/link',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Modal',
-                    icon: 'i-lucide-file-text',
-                    description: 'Display a modal within your application.',
-                    to: '/components/modal',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'NavigationMenu',
-                    icon: 'i-lucide-file-text',
-                    description: 'Display a list of links.',
-                    to: '/components/navigation-menu',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Pagination',
-                    icon: 'i-lucide-file-text',
-                    description: 'Display a list of pages.',
-                    to: '/components/pagination',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Popover',
-                    icon: 'i-lucide-file-text',
-                    description: 'Display a non-modal dialog that floats around a trigger element.',
-                    to: '/components/popover',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                },
-                {
-                    label: 'Progress',
-                    icon: 'i-lucide-file-text',
-                    description: 'Show a horizontal bar to indicate task progression.',
-                    to: '/components/progress',
-                    ui: {
-                        link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-                    }
-                }
-            ]
-        }
-    ],
-    [
-        {
-            label: 'GitHub',
-            icon: 'i-simple-icons-github',
-            badge: '3.8k',
-            to: 'https://github.com/nuxt/ui',
-            target: '_blank',
-            ui: {
-                link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-            }
-        },
-        {
-            label: 'Help',
-            icon: 'i-lucide-circle-help',
-            disabled: true,
-            ui: {
-                link: 'px-4 py-2'  // jarakkan tiap link bawahnya
-            }
-        }
-    ]
+    rawMenu.map((menu) => ({
+        label: menu.label,
+        icon: menu.icon,
+        to: menu.to,
+        active: menu.active ?? false,
+        defaultOpen: menu.defaultOpen ?? false,
+        class: defaultParentClass,
+        children: menu.children.map(child => ({
+            label: child[0],
+            icon: child[1],
+            description: child[2],
+            to: child[3],
+            class: defaultChildClass
+        }))
+    }))
 ])
-
-const itemsWithPadding = computed(() => {
-    return items.value.map(group =>
-        group.map(item => {
-            const newItem = { ...item }
-            if (props.open) {
-                newItem.ui = {
-                    ...newItem.ui,
-                    link: 'px-4 py-2',
-                    childItem: 'pb-3'
-                }
-            } else {
-                newItem.ui = {
-                    ...newItem.ui,
-                    link: 'px-0 py-0',
-                    childItem: 'pb-0'
-                }
-            }
-            if (newItem.children) {
-                newItem.children = newItem.children.map(child => ({
-                    ...child,
-                    ui: {
-                        ...child.ui,
-                        link: props.open ? 'px-4 py-2' : 'px-0 py-0'
-                    }
-                }))
-            }
-            return newItem
-        })
-    )
-})
-
 
 const props = defineProps({
     open: {

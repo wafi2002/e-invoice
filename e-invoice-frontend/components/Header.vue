@@ -1,23 +1,15 @@
 <template>
-    <header class="border-b bg-white dark:bg-gray-900 shadow-sm">
-        <UContainer class="flex items-center h-16">
+    <header class="border-b bg-white dark:bg-gray-900 shadow-sm w-full" >
+        <UContainer class="flex items-center h-16 w-full">
             <!-- Toggle Sidebar Button -->
             <div class="shrink-0 flex items-center gap-x-3">
                 <UButton icon="i-heroicons-bars-3" color="black" variant="ghost" @click="$emit('toggle-sidebar')" />
             </div>
 
-
-            <div class="flex items-center justify-center flex-1 gap-8">
-
-
-            </div>
-
             <!-- Actions -->
-            <div class="shrink-0 flex items-center gap-2">
+            <div class=" flex items-center gap-2 w-full">
                 <!-- Navigation -->
-                <UNavigationMenu highlight highlight-color="primary" orientation="horizontal" :items="items"
-                    class="data-[orientation=horizontal]:w-[600px] data-[orientation=vertical]:w-48" />
-                <UButton icon="i-heroicons-bell" color="gray" variant="ghost" />
+                <UButton icon="i-heroicons-bell" color="gray" variant="ghost" style=" margin-left: auto;" />
                 <UAvatar src="https://randomuser.me/api/portraits/men/85.jpg" />
             </div>
         </UContainer>

@@ -1,8 +1,7 @@
 <template>
-    <UContainer class="flex justify-between items-center">
+    <UContainer class="flex justify-between items-center pb-4">
         <div>
-            <!-- Mungkin logo atau heading di sini -->
-            <h1>MyApp</h1>
+            <h1>E-Invoice</h1>
         </div>
         <UBreadcrumb :items="items">
             <template #dropdown="{ item }">
@@ -18,7 +17,11 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '@nuxt/ui'
 
-const items = [
+type CustomBreadcrumbItem = BreadcrumbItem & {
+    children?: { label: string }[]
+}
+
+const items: CustomBreadcrumbItem[] = [
     {
         label: 'Home',
         to: '/'
@@ -27,15 +30,9 @@ const items = [
         slot: 'dropdown' as const,
         icon: 'i-lucide-ellipsis',
         children: [
-            {
-                label: 'Documentation'
-            },
-            {
-                label: 'Themes'
-            },
-            {
-                label: 'GitHub'
-            }
+            { label: 'Documentation' },
+            { label: 'Themes' },
+            { label: 'GitHub' }
         ]
     },
     {
@@ -46,5 +43,5 @@ const items = [
         label: 'Breadcrumb',
         to: '/components/breadcrumb'
     }
-] satisfies BreadcrumbItem[]
+]
 </script>

@@ -14,9 +14,11 @@
     "@nuxt/eslint": "^1.4.1",
     "@nuxt/icon": "^1.13.0",
     "@nuxt/ui": "https://pkg.pr.new/@nuxt/ui@4c96909",
+    "@tailwindcss/vite": "^4.1.10",
     "chart.js": "^4.4.9",
     "eslint": "^9.27.0",
     "nuxt": "^3.17.3",
+    "tailwindcss": "^4.1.10",
     "typescript": "^5.8.3",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1"
